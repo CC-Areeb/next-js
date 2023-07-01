@@ -1,38 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
 ## Basic questions
 - export default function ... v/s export function ...
 The difference is that when importing a function, if that function has export default then you need to import without the curly braces
@@ -395,6 +360,43 @@ Server-Side Components
 - These are components that are generated on the server instead of the client, in next js all JSX components by default are server side and so you would need to make sure that they do not have client side hooks like useState or useEffect as they are client side. This feature where the components are server side by default makes sure that out app perfroms better, has a better SEO which means that the app you make will be more visible, users get a better experience as there are no delays in loading the web-page and it lets us dynamically show and hide components are only 1 time the full bundle is loaded and after that React/Next takes over the routing and the navigation which means no re-rendering of the web pages after its initial loading. 
 
 
-*NOTE*
-- As per the latested next js version, all components are by default server side and so to use the client cide you must use the 
+*NOTE*:
+As per the latested next js version, all components are by default server side and so to use the client cide you must use the 
 **'use client'** directive (keyword) on top of your component so that it will become a client side component.
+
+Linking and Navigation
+
+linking is when in basic html we use an anchor tag to jump to other page and navigation is when we use a button to go to a different page.
+
+*NOTE*:
+There us an issue when auto importing the useRouter hook when using VS code. The correct statement is `import { useRouter } from 'next/navigation';`
+
+The next js documentation recommends using the `<Link href=''></Link>` tags but if you want to navigate between pages programatically then use the useRouter() hook
+
+example
+```
+import { useRouter } from 'next/navigation';
+
+export default function RegisterPage() {
+  const router = useRouter();
+
+  // this is made so that you don't have to keep repeating router.push()
+  const route = (url) => {
+        router.push(url);
+    }
+  
+    const handleLandingPage = () => {
+      route('/');
+    }
+
+  return (
+    <Button
+      onClick={handleLandingPage}
+      value='Landing Page'
+      customClass=''
+   />
+  )
+}
+```
+
+Links are used like anchor where you can let the users navigate without, let's say, any condition but you can use the useRouter() to make sure that if the user, for example, needs to be logged in then they cannot manually change the url from their browser and enter in the app so a basic if-else check can ensure that only logged-in users can access the contents.

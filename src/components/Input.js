@@ -7,6 +7,7 @@ const Input = ({ type, name, value, customClass, onChange }) => {
                 value={value}
                 onChange={onChange}
                 className={customClass}
+                id={name}
             />
         </>
     );
