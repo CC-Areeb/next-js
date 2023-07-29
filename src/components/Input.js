@@ -6,7 +6,7 @@ const Input = ({ type, name, value, customClass, onChange }) => {
                 name={name}
                 value={value}
                 onChange={onChange}
-                className={customClass}
+                className={`${customClass}`}
                 id={name}
             />
         </>
