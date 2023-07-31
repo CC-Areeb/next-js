@@ -1,7 +1,0 @@
-.main-register-container {
-    margin: 2% 25% 0% 25%;
-}
-
-.main-register-container :nth-child(odd):not(:last-child):not(label) {
-    padding: 0px 20px 0px 20px;
-}
