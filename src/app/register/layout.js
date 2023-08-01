@@ -11,7 +11,7 @@ export default function Layout({ children }) {
 
     return (
         <>
-            <div className='h-screen grid content-center' style={style}>
+            <div className='min-h-screen p-20 grid content-center' style={style}>
                 {children}
             </div>
         </>
