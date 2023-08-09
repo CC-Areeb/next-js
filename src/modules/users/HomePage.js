@@ -1,12 +1,26 @@
+import Content from '@/components/Content'
+import Navbar from '@/components/Navbar'
+import Sidebar from '@/components/Sidebar'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function HomePage() {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [activePage, setActivePage] = useState('Dashboard');
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
+    const handlePageChange = (pageName) => {
+        setActivePage(pageName);
+    };
+
     return (
         <>
-            <div className=''>
-                <h1 className='text-6xl'>Home page</h1>
-            </div>
+            <Navbar onClick={toggleSidebar} />
+            <Sidebar activePage={activePage} isOpen={isSidebarOpen} />
+            <Content />
         </>
     )
 }

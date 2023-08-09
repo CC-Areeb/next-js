@@ -1,3 +1,5 @@
+'use client'
+
 import HomePage from "@/modules/users/HomePage";
 
 export default function Home() {
