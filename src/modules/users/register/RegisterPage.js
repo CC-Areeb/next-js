@@ -1,24 +1,26 @@
 import Input from '@/components/Input'
 import React, { useState } from 'react'
 import Button from '@/components/Button';
-import Link from 'next/link';
 
 export default function RegisterPage() {
 
     // User data to be stored
     const [name, setName] = useState('');
+    const [nameError, setNameError] = useState(false);
+
     const [username, setUsername] = useState('');
+    const [usernameError, setUsernameError] = useState(false);
+
     const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState(false);
+
     const [password, setPassword] = useState('');
+    const [passwordError, setPasswordError] = useState(false);
+
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [street, setStreet] = useState('');
-    const [suite, setSuite] = useState('');
-    const [city, setCity] = useState('');
-    const [zipCode, setZipCode] = useState('');
-    const [latitude, setLatitude] = useState('');
-    const [longitude, setLongitude] = useState('');
-    const [error, setError] = useState(false);
-    const [errorValue, setErrorValue] = useState(false);
+    const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+
+    const [passwordMismatch, setpasswordMismatch] = useState(false)
 
     const handleName = (event) => {
         setName(event.target.value);
@@ -40,54 +42,42 @@ export default function RegisterPage() {
         setConfirmPassword(event.target.value);
     };
 
-    const handleStreet = (event) => {
-        setStreet(event.target.value);
-    }
-
-    const handleSuite = (event) => {
-        setSuite(event.target.value);
-    }
-
-    const handleCity = (event) => {
-        setCity(event.target.value);
-    }
-
-    const handleZipCode = (event) => {
-        setZipCode(event.target.value);
-    }
-
-    const handleLatitude = (event) => {
-        setLatitude(event.target.value);
-    }
-
-    const handleLongitude = (event) => {
-        setLongitude(event.target.value);
-    }
-
     const handleSubmit = () => {
-        // Required field regex pattern
-        const requiredRegex = /^.+$/;
-
         // Check if any of the fields are empty (not filled)
-        if (
-            !requiredRegex.test(name) ||
-            !requiredRegex.test(username) ||
-            !requiredRegex.test(email) ||
-            !requiredRegex.test(password)
-        ) {
-            setError(true);
-            setErrorValue(false); // Reset the error for password mismatch
-        } else if (password !== confirmPassword) {
-            setErrorValue(true);
-            setError(false);
+        if (!name || !username || !email || !password || !confirmPassword) {
+            setNameError(true);
+            setUsernameError(true);
+            setEmailError(true);
+            setPasswordError(true);
+            setConfirmPasswordError(true);
+        }
+        
+        else if (name) {
+            setNameError(false);
+        }
+        
+        else if (username) {
+            setUsernameError(false);
         }
 
-        else if (requiredRegex.test(name)) {
-            setError(false);
+        else if (email) {
+            setEmailError(false);
+        }
+        
+        else if (password) {
+            setPasswordError(false);
+        } 
+        
+        else if (confirmPassword) {
+            setConfirmPasswordError(false);
+        } 
+        
+        else if (password != confirmPassword) {
+            setpasswordMismatch(true)
         }
 
-        else if (requiredRegex.test(name)) {
-            setError(false);
+        else if (password == confirmPassword) {
+            setpasswordMismatch(false)
         }
 
         else {
@@ -116,7 +106,7 @@ export default function RegisterPage() {
                                 placeholder='Name'
                             />
                             {
-                                error && (
+                                nameError && (
                                     <>
                                         <span className='text-red-600 float-left font-bold font-sans'>Please enter your name*</span>
                                     </>
@@ -135,7 +125,7 @@ export default function RegisterPage() {
                                 placeholder='Username'
                             />
                             {
-                                error && (
+                                usernameError && (
                                     <>
                                         <span className='text-red-600 float-left font-bold font-sans'>Please enter your username*</span>
                                     </>
@@ -154,7 +144,7 @@ export default function RegisterPage() {
                                 placeholder='Email'
                             />
                             {
-                                error && (
+                                emailError && (
                                     <>
                                         <span className='text-red-600 float-left font-bold font-sans'>Please enter a valid email*</span>
                                     </>
@@ -173,14 +163,14 @@ export default function RegisterPage() {
                                 placeholder='Password'
                             />
                             {
-                                error && (
+                                passwordError && (
                                     <>
                                         <span className='text-red-600 float-left font-bold font-sans'>Please enter a password*</span>
                                     </>
                                 )
                             }
                             {
-                                errorValue && (
+                                passwordMismatch && (
                                     <>
                                         <span className='text-red-600 float-left font-bold font-sans'>Passwords did not match*</span>
                                     </>
@@ -199,7 +189,7 @@ export default function RegisterPage() {
                                 placeholder="Confirm Password"
                             />
                             {
-                                error && (
+                                confirmPasswordError && (
                                     <>
                                         <span className="text-red-600 float-left font-bold font-sans">
                                             {confirmPassword.length === 0 ? 'Please confirm your password*' : ''}
@@ -209,7 +199,7 @@ export default function RegisterPage() {
                             }
 
                             {
-                                errorValue && (
+                                passwordMismatch && (
                                     <>
                                         <span className='text-red-600 float-left font-bold font-sans'>Passwords did not match*</span>
                                     </>
@@ -217,77 +207,6 @@ export default function RegisterPage() {
                             }
                         </div>
                     </div>
-
-                    <div className="grid grid-cols-2 gap-4 px-10">
-                        <div className="mb-6">
-                            <Input
-                                type='text'
-                                name='street'
-                                id='street'
-                                value={street}
-                                onChange={handleStreet}
-                                customClass='w-full px-2 py-4 rounded-lg'
-                                placeholder='Street'
-                            />
-                        </div>
-
-                        <div className="mb-6">
-                            <Input
-                                type='text'
-                                name='suite'
-                                id='suite'
-                                value={suite}
-                                onChange={handleSuite}
-                                customClass='w-full px-2 py-4 rounded-lg'
-                                placeholder='Suite'
-                            />
-                        </div>
-
-                        <div className="mb-6">
-                            <Input
-                                type='text'
-                                name='latitude'
-                                id='latitude'
-                                value={latitude}
-                                onChange={handleLatitude}
-                                customClass='w-full px-2 py-4 rounded-lg'
-                                placeholder='Latitude'
-                            />
-                        </div>
-
-                        <div className="mb-6">
-                            <Input
-                                type='text'
-                                name='longitude'
-                                id='longitude'
-                                value={longitude}
-                                onChange={handleLongitude}
-                                customClass='w-full px-2 py-4 rounded-lg'
-                                placeholder='Longitude'
-                            />
-                        </div>
-
-                        <div className="mb-6">
-                            <select name="city" id="city">
-                                <option value="" selected disabled>Choose your City</option>
-                                <option value="">City 1</option>
-                                <option value="">City 2</option>
-                                <option value="">City 3</option>
-                                <option value="">City 4</option>
-                            </select>
-                        </div>
-
-                        <div className="mb-6">
-                            <select name="zip_code" id="zip_code">
-                                <option value="" selected disabled>Zip code list</option>
-                                <option value="">Zip code 1</option>
-                                <option value="">Zip code 2</option>
-                                <option value="">Zip code 3</option>
-                                <option value="">Zip code 4</option>
-                            </select>
-                        </div>
-                    </div>
-
                     <div className="text-center">
                         <Button
                             type='submit'
