@@ -1,6 +1,7 @@
 import Input from '@/components/Input'
 import React, { useState } from 'react'
 import Button from '@/components/Button';
+import Link from 'next/link';
 
 export default function RegisterPage() {
 
@@ -51,11 +52,11 @@ export default function RegisterPage() {
             setPasswordError(true);
             setConfirmPasswordError(true);
         }
-        
+
         else if (name) {
             setNameError(false);
         }
-        
+
         else if (username) {
             setUsernameError(false);
         }
@@ -63,15 +64,15 @@ export default function RegisterPage() {
         else if (email) {
             setEmailError(false);
         }
-        
+
         else if (password) {
             setPasswordError(false);
-        } 
-        
+        }
+
         else if (confirmPassword) {
             setConfirmPasswordError(false);
-        } 
-        
+        }
+
         else if (password != confirmPassword) {
             setpasswordMismatch(true)
         }
@@ -214,6 +215,12 @@ export default function RegisterPage() {
                             value="Apply for registration!"
                             customClass='text-2xl mb-6'
                         />
+                    </div>
+                    <div className='pb-4 text-center'>
+                        <span>
+                            {`Don't have an account?`}
+                        </span>
+                        <Link href='/login' className='font-medium text-lg text-blue-600 dark:text-blue-500 hover:underline'>Login</Link>
                     </div>
                 </div>
             </form>

@@ -42,3 +42,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - This project uses the new `app` directory feature.
 
 - Here is the link to the documentation *https://nextjs.org/docs*
+
+## Note
+- I am using flowbites for the styling for the components
+- Here is the link to their documentation *https://flowbite.com/docs/getting-started/introduction/*
