@@ -3,6 +3,8 @@
 import usersApi from '@/api/endpoints/users';
 import Button from '@/components/Button';
 import Modal from '@/components/Modal';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 export default function Users() {
@@ -36,7 +38,6 @@ export default function Users() {
     const handleDelete = () => {
         alert('User data deleted.');
     };
-
     return (
         <>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
@@ -76,10 +77,9 @@ export default function Users() {
                                         customClass='bg-red-500 hover:bg-red-700 text-white mx-4'
                                         onClick={deleteUser}
                                     />
-                                    <Button
-                                        value='Edit'
-                                        customClass='bg-yellow-500 hover:bg-yellow-600 text-white mx-4'
-                                    />
+                                    <Link href={`/users/${user.id}`}>
+                                        Edit
+                                    </Link>
                                 </td>
                             </tr>
                         ))}
