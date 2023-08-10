@@ -98,7 +98,7 @@ export default function LoginPage() {
                     <Button
                         type='submit'
                         value='Login'
-                        customClass='mt-5 text-2xl'
+                        customClass='bg-blue-500 hover:bg-blue-700 text-white mt-5 text-2xl'
                     />
                 </div>
 

@@ -6,20 +6,14 @@ import React, { useState } from 'react'
 
 export default function HomePage() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [activePage, setActivePage] = useState('Dashboard');
+    const [activePage] = useState('Dashboard');
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
 
-    const handlePageChange = (pageName) => {
-        setActivePage(pageName);
-    };
-
     return (
         <>
-            <Navbar onClick={toggleSidebar} />
-            <Sidebar activePage={activePage} isOpen={isSidebarOpen} />
             <Content />
         </>
     )

@@ -213,7 +213,7 @@ export default function RegisterPage() {
                             type='submit'
                             onClick={handleSubmit}
                             value="Apply for registration!"
-                            customClass='text-2xl mb-6'
+                            customClass='bg-blue-500 hover:bg-blue-700 text-white text-2xl mb-6'
                         />
                     </div>
                     <div className='pb-4 text-center'>
