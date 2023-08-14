@@ -400,3 +400,114 @@ export default function RegisterPage() {
 ```
 
 Links are used like anchor where you can let the users navigate without, let's say, any condition but you can use the useRouter() to make sure that if the user, for example, needs to be logged in then they cannot manually change the url from their browser and enter in the app so a basic if-else check can ensure that only logged-in users can access the contents.
+
+## Dynamic route
+We use dynamic routes to open pages based on a certain unique detail like an id for example. This comes in handy when, let's say, we want to show complete data of a single item or complete data of a person who is using the application. 
+
+### Dynamic route folder structure
+Since we are working with nextjs, there is a certain way we make dynamic routes. It is made by using a set of square brackets `[]`. Firstly you need to make a new directory(folder) inside the app directory where all our front-end pages are being made.
+
+- src/app/users/[id]/page.js
+
+- src and app are already made when we install next js app
+- users is a directory I made for storing all my pages that are related to users.
+- now notice I made another directory by the name of `[id]`. This is how next js can know that this is a dynamic route.
+- the page.js is the usual js file that we use to show in the browser.
+
+### Code example
+
+- First step is to actually have an api for working, I am using a free api available on the internet called `https://jsonplaceholder.typicode.com`.
+
+    In my project I made a seperate api folder where only the api urls will be stored as shown below
+    ```
+    const API_URL = process.env.API_URL;
+
+    const usersApi = {
+        users: 'https://jsonplaceholder.typicode.com/users',
+        editUsers: (id) => `https://jsonplaceholder.typicode.com/users/${id}`,
+
+        getUsers: API_URL + '/users',
+        getUser: (id) => `/api/users/${id}`,
+        createUser: '/api/users',
+        updateUser: (id) => `/api/users/${id}`,
+        deleteUser: (id) => `/api/users/${id}`,
+    };
+
+    export default usersApi;
+    ```
+
+    Now we can use the usersApi to use any method defined inside this object.
+
+- Next we will the editUsers method and loop it so that it can generate unique query parameters for different users. Fisrt we can use a hook called useEffect to get the data of all the users
+
+    ```
+    <!-- Get all users -->
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        const getUsers = async () => {
+            try {
+                const response = await fetch(usersApi.users);
+                const data = await response.json();
+                setUsers(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getUsers();
+    }, []);
+    ```
+
+- Next we are going to loop it to show it in a tabular form
+    ```
+    <div className="relative overflow-x-auto shadow-md          sm:rounded-lg ">
+                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 text-center">
+                        <tr>
+                            <th scope="col" className="px-6 py-3">
+                                Name
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Username
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Email
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.map(user => (
+                            <tr key={user.id} className="bg-white border-b dark:bg-gray-900 dark:border-gray-700 text-center">
+                        <td className='px-6 py-4'>
+                            {user.name}
+                        </td>
+                        <td className='px-6 py-4'>
+                            {user.username}
+                        </td>
+                        <td className='px-6 py-4'>
+                            {user.email}
+                        </td>
+                        <td className='px-6 py-4 flex justify-center space-x-1'>
+                            <Button
+                                type='submit'
+                                value='Delete'
+                                customClass='bg-red-500 hover:bg-red-700 text-white mx-4'
+                                onClick={deleteUser}
+                            />
+                            <Link href={`/users/${user.id}`}>
+                                Edit
+                            </Link>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </div>
+    ```
+
+
+- As you can observe that we are using the `${user.id}` as a means to show the edit page of 1 single user. The url will be something like `http://localhost:3000/users/1` where the 1 in the end represents the id of a user. Since ids are always uniquely generated by the database so this is better to use. You can also use strings as well known as a website's slug or whatever you wish.
+
+- Here is the link to dynamic routes **https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes**
