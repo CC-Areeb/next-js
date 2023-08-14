@@ -40,6 +40,10 @@ export default function Users() {
     };
     return (
         <>
+            <div className='mb-8'>
+                <h1 className='text-4xl'>All users</h1>
+            </div>
+
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 text-center">
@@ -77,7 +81,7 @@ export default function Users() {
                                         customClass='bg-red-500 hover:bg-red-700 text-white mx-4'
                                         onClick={deleteUser}
                                     />
-                                    <Link href={`/users/${user.id}`}>
+                                    <Link href={`/users/${user.id}`} className='bg-yellow-500 rounded px-6 py-2 text-white hover:bg-yellow-600 transform transition-transform duration-300 hover:scale-110'>
                                         Edit
                                     </Link>
                                 </td>
