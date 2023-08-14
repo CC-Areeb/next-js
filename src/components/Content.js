@@ -11,16 +11,22 @@ export default function Content() {
         router.push('/users');
     }
 
+    const NavToUserPosts = () => {
+        router.push('/posts');
+    }
+
     return (
         <>
-            <div className="grid grid-cols-3 gap-3 mb-4" onClick={NavToUsers}>
+            <div className="grid grid-cols-3 gap-3 mb-4">
                 <Statboxes
                     customClass='h-24 rounded bg-green-600 hover:bg-green-800 transition cursor-pointer'
                     statContent='Total Users'
+                    onClick={NavToUsers}
                 />
                 <Statboxes
                     customClass='h-24 rounded bg-green-600 hover:bg-green-800 transition cursor-pointer'
-                    statContent='User Activity'
+                    statContent='User Posts'
+                    onClick={NavToUserPosts}
                 />
                 <Statboxes
                     customClass='h-24 rounded bg-green-600 hover:bg-green-800 transition cursor-pointer'
