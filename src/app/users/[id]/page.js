@@ -258,7 +258,7 @@ const EditUserPage = ({ params }) => {
                     </>
                 )
                     :
-                    (<p>Loading user data...</p>)
+                    (<p>Loading posts...</p>)
             }
         </>
     );

@@ -4,6 +4,7 @@ import postApi from '@/api/endpoints/posts';
 import usersApi from '@/api/endpoints/users';
 import Button from '@/components/Button';
 import Modal from '@/components/Modal';
+import { truncateText } from '@/utils/textTruncate';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
@@ -30,7 +31,6 @@ export default function Posts() {
             try {
                 const response = await fetch(usersApi.users);
                 const data = await response.json();
-                // Create a mapping of users data by userId
                 const usersData = data.reduce((acc, user) => {
                     acc[user.id] = user;
                     return acc;
@@ -88,10 +88,10 @@ export default function Posts() {
                                     {users[post.userId] ? users[post.userId].name : ''}
                                 </td>
                                 <td className='px-6 py-4'>
-                                    {post.title}
+                                    {truncateText(post.title, 10)}
                                 </td>
                                 <td className='px-6 py-4'>
-                                    {post.body}
+                                    {truncateText(post.body, 50)}
                                 </td>
                                 <td className='px-6 py-4 flex justify-center space-x-1'>
                                     <Button
@@ -101,7 +101,7 @@ export default function Posts() {
                                         onClick={deleteUser}
                                     />
                                     <Link href={`/posts/${post.id}`} className='bg-yellow-500 rounded px-6 py-2 text-white hover:bg-yellow-600 transform transition-transform duration-300 hover:scale-110'>
-                                        Edit
+                                        Read full text
                                     </Link>
                                 </td>
                             </tr>

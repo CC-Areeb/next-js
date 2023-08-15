@@ -15,6 +15,10 @@ export default function Content() {
         router.push('/posts');
     }
 
+    const NavToUserActivity = () => {
+        router.push('/stats');
+    }
+
     return (
         <>
             <div className="grid grid-cols-3 gap-3 mb-4">
@@ -30,7 +34,8 @@ export default function Content() {
                 />
                 <Statboxes
                     customClass='h-24 rounded bg-green-600 hover:bg-green-800 transition cursor-pointer'
-                    statContent='Message Statistics'
+                    statContent='User activity'
+                    onClick={NavToUserActivity}
                 />
             </div>
             <Statboxes
