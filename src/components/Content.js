@@ -19,6 +19,10 @@ export default function Content() {
         router.push('/stats');
     }
 
+    const NavToPerfromanceMatrix = () => {
+        router.push('/performance');
+    }
+
     return (
         <>
             <div className="grid grid-cols-3 gap-3 mb-4">
@@ -41,6 +45,7 @@ export default function Content() {
             <Statboxes
                 customClass='h-48 mb-4 rounded bg-cyan-600 hover:bg-cyan-900 transition cursor-pointer'
                 statContent='Performance Metrics'
+                onClick={NavToPerfromanceMatrix}
             />
             <div className="grid grid-cols-2 gap-4 mb-4">
                 <Statboxes
