@@ -6,87 +6,20 @@ import Link from 'next/link';
 export default function RegisterPage() {
 
     // User data to be stored
-    const [name, setName] = useState('');
-    const [nameError, setNameError] = useState(false);
+    const [formValues, setFormValues] = useState({
+        name: '',
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+    })
 
-    const [username, setUsername] = useState('');
-    const [usernameError, setUsernameError] = useState(false);
-
-    const [email, setEmail] = useState('');
-    const [emailError, setEmailError] = useState(false);
-
-    const [password, setPassword] = useState('');
-    const [passwordError, setPasswordError] = useState(false);
-
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [confirmPasswordError, setConfirmPasswordError] = useState(false);
-
-    const [passwordMismatch, setpasswordMismatch] = useState(false)
-
-    const handleName = (event) => {
-        setName(event.target.value);
+    const handleFormValues = (event) =>{
+        setFormValues({
+            ...formValues,
+            [event.target.name]: event.target.value
+        })
     }
-
-    const handleUsername = (event) => {
-        setUsername(event.target.value);
-    }
-
-    const handleEmail = (event) => {
-        setEmail(event.target.value);
-    }
-
-    const handlePassword = (event) => {
-        setPassword(event.target.value);
-    }
-
-    const handleConfirmPassword = (event) => {
-        setConfirmPassword(event.target.value);
-    };
-
-    const handleSubmit = () => {
-        // Check if any of the fields are empty (not filled)
-        if (!name || !username || !email || !password || !confirmPassword) {
-            setNameError(true);
-            setUsernameError(true);
-            setEmailError(true);
-            setPasswordError(true);
-            setConfirmPasswordError(true);
-        }
-
-        else if (name) {
-            setNameError(false);
-        }
-
-        else if (username) {
-            setUsernameError(false);
-        }
-
-        else if (email) {
-            setEmailError(false);
-        }
-
-        else if (password) {
-            setPasswordError(false);
-        }
-
-        else if (confirmPassword) {
-            setConfirmPasswordError(false);
-        }
-
-        else if (password != confirmPassword) {
-            setpasswordMismatch(true)
-        }
-
-        else if (password == confirmPassword) {
-            setpasswordMismatch(false)
-        }
-
-        else {
-            setError(false);
-            setErrorValue(false);
-            alert('Form submitted');
-        }
-    };
 
     return (
         <>
@@ -102,17 +35,10 @@ export default function RegisterPage() {
                                 name='name'
                                 id='name'
                                 value={name}
-                                onChange={handleName}
+                                onChange={handleFormValues}
                                 customClass='w-full px-2 py-4 rounded-lg'
                                 placeholder='Name'
                             />
-                            {
-                                nameError && (
-                                    <>
-                                        <span className='text-red-600 float-left font-bold font-sans'>Please enter your name*</span>
-                                    </>
-                                )
-                            }
                         </div>
 
                         <div className="mb-6">
@@ -121,17 +47,10 @@ export default function RegisterPage() {
                                 name='username'
                                 id='username'
                                 value={username}
-                                onChange={handleUsername}
+                                onChange={handleFormValues}
                                 customClass='w-full px-2 py-4 rounded-lg'
                                 placeholder='Username'
                             />
-                            {
-                                usernameError && (
-                                    <>
-                                        <span className='text-red-600 float-left font-bold font-sans'>Please enter your username*</span>
-                                    </>
-                                )
-                            }
                         </div>
 
                         <div className="mb-6">
@@ -140,17 +59,10 @@ export default function RegisterPage() {
                                 name='email'
                                 id='email'
                                 value={email}
-                                onChange={handleEmail}
+                                onChange={handleFormValues}
                                 customClass='w-full px-2 py-4 rounded-lg'
                                 placeholder='Email'
                             />
-                            {
-                                emailError && (
-                                    <>
-                                        <span className='text-red-600 float-left font-bold font-sans'>Please enter a valid email*</span>
-                                    </>
-                                )
-                            }
                         </div>
 
                         <div className="mb-6">
@@ -159,24 +71,10 @@ export default function RegisterPage() {
                                 name='password'
                                 id='password'
                                 value={password}
-                                onChange={handlePassword}
+                                onChange={handleFormValues}
                                 customClass='w-full px-2 py-4 rounded-lg'
                                 placeholder='Password'
                             />
-                            {
-                                passwordError && (
-                                    <>
-                                        <span className='text-red-600 float-left font-bold font-sans'>Please enter a password*</span>
-                                    </>
-                                )
-                            }
-                            {
-                                passwordMismatch && (
-                                    <>
-                                        <span className='text-red-600 float-left font-bold font-sans'>Passwords did not match*</span>
-                                    </>
-                                )
-                            }
                         </div>
 
                         <div className="">
@@ -185,27 +83,10 @@ export default function RegisterPage() {
                                 name="confirm_password"
                                 id="confirm_password"
                                 value={confirmPassword}
-                                onChange={handleConfirmPassword}
+                                onChange={handleFormValues}
                                 customClass="w-full px-2 py-4 rounded-lg"
                                 placeholder="Confirm Password"
                             />
-                            {
-                                confirmPasswordError && (
-                                    <>
-                                        <span className="text-red-600 float-left font-bold font-sans">
-                                            {confirmPassword.length === 0 ? 'Please confirm your password*' : ''}
-                                        </span>
-                                    </>
-                                )
-                            }
-
-                            {
-                                passwordMismatch && (
-                                    <>
-                                        <span className='text-red-600 float-left font-bold font-sans'>Passwords did not match*</span>
-                                    </>
-                                )
-                            }
                         </div>
                     </div>
                     <div className="text-center">

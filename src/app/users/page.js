@@ -15,7 +15,7 @@ export default function Users() {
             try {
                 const response = await fetch(usersApi.users);
                 const data = await response.json();
-                setUsers(data);
+                setUsers(data.users);
             } catch (error) {
                 console.log(error);
             }
@@ -50,9 +50,13 @@ export default function Users() {
                             <th scope="col" className="px-6 py-3">
                                 Name
                             </th>
-                            <th scope="col" className="px-6 py-3">
-                                Username
-                            </th>
+                            {
+                                users.username && (
+                                    <th scope="col" className="px-6 py-3">
+                                        Username
+                                    </th>
+                                )
+                            }
                             <th scope="col" className="px-6 py-3">
                                 Email
                             </th>
@@ -67,9 +71,13 @@ export default function Users() {
                                 <td className='px-6 py-4'>
                                     {user.name}
                                 </td>
-                                <td className='px-6 py-4'>
-                                    {user.username}
-                                </td>
+                                {
+                                    user.username && (
+                                        <td className='px-6 py-4'>
+                                            {user.username}
+                                        </td>
+                                    )
+                                }
                                 <td className='px-6 py-4'>
                                     {user.email}
                                 </td>

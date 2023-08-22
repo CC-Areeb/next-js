@@ -12,9 +12,10 @@ export default function LoginPage() {
     const csrfToken = useCsrfToken();
 
     const router = useRouter();
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [formValues, setFormValues] = useState({
+        email: '',
+        password: '',
+    })
     const [showModal, setShowModal] = useState(false);
 
     const handleModalClose = () => {
@@ -22,11 +23,10 @@ export default function LoginPage() {
     };
 
     const handleEmail = (event) => {
-        setEmail(event.target.value);
-    }
-
-    const handlePassword = (event) => {
-        setPassword(event.target.value);
+        setFormValues({
+            ...formValues,
+            [event.target.name]: event.target.value
+        });
     }
 
     const handleSubmit = async (e) => {
