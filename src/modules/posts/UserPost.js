@@ -60,7 +60,7 @@ export default function UserPosts() {
     return (
         <>
             <div className='mb-8'>
-                <h1 className='text-4xl'>All users</h1>
+                <h1 className='text-4xl'>All Posts</h1>
             </div>
 
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
