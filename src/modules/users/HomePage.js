@@ -1,12 +1,9 @@
-import Content from '@/components/Content'
-import Navbar from '@/components/Navbar'
-import Sidebar from '@/components/Sidebar'
-import Link from 'next/link'
-import React, { useState } from 'react'
+import Content from '@/components/Content';
+import { withAuth } from '@/utils/withAuth';
+import React, { useState } from 'react';
 
-export default function HomePage() {
+function HomePage() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [activePage] = useState('Dashboard');
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -16,5 +13,7 @@ export default function HomePage() {
         <>
             <Content />
         </>
-    )
+    );
 }
+
+export default withAuth(HomePage);
