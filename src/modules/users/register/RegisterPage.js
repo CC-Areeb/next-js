@@ -21,10 +21,15 @@ export default function RegisterPage() {
         })
     }
 
+    const handleSubmit = (event) => {
+        // event.preventDefault();
+        alert("Ongoing process!");
+    }
+
     return (
         <>
             <form className='md:mx-[100px] lg:mx-[200px] xl:mx-[300px] rounded-2xl' method='POST'>
-                <div className='bg-gray-300 rounded-md text-center'>
+                <div className='bg-white rounded-md text-center'>
                     <div className='pt-6'>
                         <h1 className='text-2xl font-poppins'>Register Now!</h1>
                     </div>
@@ -34,9 +39,8 @@ export default function RegisterPage() {
                                 type='text'
                                 name='name'
                                 id='name'
-                                value={name}
                                 onChange={handleFormValues}
-                                customClass='w-full px-2 py-4 rounded-lg'
+                                customClass='w-full px-2 py-4'
                                 placeholder='Name'
                             />
                         </div>
@@ -46,9 +50,8 @@ export default function RegisterPage() {
                                 type='text'
                                 name='username'
                                 id='username'
-                                value={username}
                                 onChange={handleFormValues}
-                                customClass='w-full px-2 py-4 rounded-lg'
+                                customClass='w-full px-2 py-4'
                                 placeholder='Username'
                             />
                         </div>
@@ -58,9 +61,8 @@ export default function RegisterPage() {
                                 type='email'
                                 name='email'
                                 id='email'
-                                value={email}
                                 onChange={handleFormValues}
-                                customClass='w-full px-2 py-4 rounded-lg'
+                                customClass='w-full px-2 py-4'
                                 placeholder='Email'
                             />
                         </div>
@@ -70,9 +72,8 @@ export default function RegisterPage() {
                                 type='password'
                                 name='password'
                                 id='password'
-                                value={password}
                                 onChange={handleFormValues}
-                                customClass='w-full px-2 py-4 rounded-lg'
+                                customClass='w-full px-2 py-4'
                                 placeholder='Password'
                             />
                         </div>
@@ -82,9 +83,8 @@ export default function RegisterPage() {
                                 type="password"
                                 name="confirm_password"
                                 id="confirm_password"
-                                value={confirmPassword}
                                 onChange={handleFormValues}
-                                customClass="w-full px-2 py-4 rounded-lg"
+                                customClass="w-full px-2 py-4"
                                 placeholder="Confirm Password"
                             />
                         </div>
