@@ -1,5 +1,4 @@
 import Content from '@/components/Content';
-import { withAuth } from '@/utils/withAuth';
 import React, { useState } from 'react';
 
 function HomePage() {
@@ -16,4 +15,4 @@ function HomePage() {
     );
 }
 
-export default withAuth(HomePage);
+export default HomePage;

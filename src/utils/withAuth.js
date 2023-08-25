@@ -1,9 +1,6 @@
-
-
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Spinner from '@/components/Spinner';
-import NotUserLayout from '@/layouts/NotUserLayout';
 export const withAuth = (WrappedComponent) => {
     return (props) => {
         const router = useRouter();
@@ -16,7 +13,7 @@ export const withAuth = (WrappedComponent) => {
                 setLoader(false);
             }
         }, []);
-        
+
         if (loader) {
             return <Spinner />;
         }

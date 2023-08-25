@@ -2,14 +2,15 @@
 
 import CommonLayout from "@/layouts/CommonLayout";
 import HomePage from "@/modules/users/HomePage";
-
-export default function Home() {
+import { withAuth } from "@/utils/withAuth";
+const Home = () => {
   return (
     <>
       <CommonLayout>
         <HomePage />
       </CommonLayout>
     </>
-  )
+  );
 }
 
+export default withAuth(Home);
