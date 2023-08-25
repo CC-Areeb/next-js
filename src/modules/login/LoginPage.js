@@ -5,7 +5,7 @@ import Modal from '@/components/Modal';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function LoginPage() {
     const router = useRouter();
@@ -51,6 +51,14 @@ export default function LoginPage() {
             setShowModal(true);
         }
     };
+
+    useEffect(() => {
+        const isAuthenticated = !!localStorage.getItem('csrf_token');
+        if (isAuthenticated) {
+            router.push('/home');
+        }
+    }, []);
+
     return (
         <>
             <form onSubmit={handleSubmit} className='p-20 md:mx-[100px] lg:mx-[200px] xl:mx-[300px] 2xl:mx-[550px] bg-white rounded-2xl' method='POST'>
