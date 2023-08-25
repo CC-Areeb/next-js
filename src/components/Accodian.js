@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-export default function Accordion({ title, content }) {
+export default function Accordion({ title, content, customClass }) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const toggleAccordion = () => {
@@ -10,7 +10,7 @@ export default function Accordion({ title, content }) {
     };
 
     return (
-        <div className='w-[50%] mx-auto border shadow-md'>
+        <div className={`w-[50%] mx-auto border shadow-md ${customClass}`}>
             <button
                 type='button'
                 className={`w-full text-left py-4 px-6 font-semibold border-b flex justify-between items-center ${isExpanded ? 'bg-blue-900 text-white' : 'bg-blue-500 text-white'}`}
